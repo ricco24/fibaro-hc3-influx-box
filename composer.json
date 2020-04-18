@@ -11,6 +11,6 @@
 	],
 	"require": {
 		"php": ">= 7.1.0",
-		"kelemen/fibaro-hc3-influx-logs": "dev-master"
+		"kelemen/fibaro-hc3-influx-logs": "^1.0"
 	}
 }
