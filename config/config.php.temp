@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'influx' => [
+        'host' => '',           // base InfluxDB host or IP
+        'database' => '',       // logs will be saved into this database [database has to be already created in InfluxDB]
+        'port' => 8086,
+        'username' => '',       // InfluxDB username [with write privileges to selected database]
+        'password' => '',       // InfluxDB password
+        'ssl' => false,         // set true if InfluxDB is running via https
+        'verifySSL' => false,   // verify SSL certificate [set to false if using self signed certificates]
+        'timeout' => 5,         // call timeout in seconds [set to reasonable value to prevent infinite calls]
+        'connectTimeout' => 3   // connect timeout in seconds [set to reasonable value to prevent infinite calls]
+    ],
+    'hc' => [
+        'url' => '',            // base url of HC3
+        'username' => '',       // login username
+        'password' => '',       // login password
+        'verifySSL' => false    // verify SSL certificate [set to false if using self signed certificates]
+    ],
+    'storage' => [
+        'type' => 'file',       // Type of used storage [current only file is implemented]
+        'directory' => __DIR__ . '/../storage' // absolute path to storage directory [write permissions needed]
+    ],
+    'commands' => [
+        'consumption' => [
+            'devices' => []     // devices which consumption we want to log (this devices has to support power/consumption logging - like wall plugs etc.)
+        ]
+    ]
+];

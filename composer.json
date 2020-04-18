@@ -1,0 +1,16 @@
+{
+	"name": "kelemen/fibaro-hc3-influx-box",
+	"description": "Sandbox for Fibaro HC3 to influx logs",
+	"license": "MIT",
+	"keywords": ["fibaro","hc3","influx","logs","sandbox"],
+	"authors": [
+		{
+			"name": "Samuel Kelemen",
+			"email": "kelemen.samuel@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">= 7.1.0",
+		"kelemen/fibaro-hc3-influx-logs": "dev-master"
+	}
+}
