@@ -62,9 +62,17 @@ return [
 # Open crontab
 crontab -e
 
-# Add this lines and save (run logs import every 10 minutes)
+# Add this lines and save
+# Run every 10 minutes (history logs)
 */10 * * * * <PROJECT_DIR>/vendor/bin/fibaro log:consumption > /dev/null 2>&1
 */10 * * * * <PROJECT_DIR>/vendor/bin/fibaro log:events > /dev/null 2>&1
+
+# Run every 1 minute (status updates from last call)
+* * * * * <PROJECT_DIR>/vendor/bin/fibaro log:refreshStates > /dev/null 2>&1
+
+# Run every 1 minute (actual status snapshot)
+* * * * * <PROJECT_DIR>/vendor/bin/fibaro log:diagnostics > /dev/null 2>&1
+* * * * * <PROJECT_DIR>/vendor/bin/fibaro log:weather > /dev/null 2>&1
 ```
 
 ### Commands
