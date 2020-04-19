@@ -17,10 +17,10 @@ mkdir /home/pi/fibaro
 cd /home/pi/fibaro
 
 # Clone project skeleton to created directory
-composer create-project kelemen/fibaro-hc3-influx-box .
+composer create-project kelemen/fibaro-hc3-influx-box . dev-master
 
 # Edit configuration
-mv config.php.temp config.php
+mv config/config.php.temp config/config.php
 vim config/config.php
 ```
 
@@ -73,6 +73,20 @@ crontab -e
 # Run every 1 minute (actual status snapshot)
 * * * * * <PROJECT_DIR>/vendor/bin/fibaro log:diagnostics > /dev/null 2>&1
 * * * * * <PROJECT_DIR>/vendor/bin/fibaro log:weather > /dev/null 2>&1
+```
+
+**Also is recommended to run commands with some blocking mechanism. (like flock, run-one, etc.)**
+```bash
+# Run every 10 minutes (history logs)
+*/10 * * * * /usr/bin/flock -n /tmp/log_consumption.lock <PROJECT_DIR>/vendor/bin/fibaro log:consumption > /dev/null 2>&1
+*/10 * * * * /usr/bin/flock -n /tmp/log_events.lock <PROJECT_DIR>/vendor/bin/fibaro log:events > /dev/null 2>&1
+
+# Run every 1 minute (status updates from last call)
+* * * * * /usr/bin/flock -n /tmp/log_refresh_states.lock <PROJECT_DIR>/vendor/bin/fibaro log:refreshStates > /dev/null 2>&1
+
+# Run every 1 minute (actual status snapshot)
+* * * * * /usr/bin/flock -n /tmp/log_diagnostics.lock <PROJECT_DIR>/vendor/bin/fibaro log:diagnostics > /dev/null 2>&1
+* * * * * /usr/bin/flock -n /tmp/log_weather.lock <PROJECT_DIR>/vendor/bin/fibaro log:weather > /dev/null 2>&1
 ```
 
 ### Commands
